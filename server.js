@@ -50,11 +50,25 @@ const Book = mongoose.model('Book', {
   }
 });
 
-const addBooksToDatabase = () => {
-  booksData.forEach((book) => {
-    new Book(book).save();
-  });
-};
+//When the server runs with RESET_DATABASE=true npm run dev -> it will reset the database, reload MongoDB compass.
+//When the server runs with npm run dev, no updates are accepted to the server. 
+
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting database!')
+
+  const seedDatabase = async () => {
+    await Book.deleteMany()
+
+    const addBooksToDatabase = () => {
+      booksData.forEach((book) => {
+        new Book(book).save()
+      })
+    }
+    addBooksToDatabase()
+    //This adds a new collection of books.
+  }
+  seedDatabase()
+}
 //addBooksToDatabase();
 //This adds a new collection of books, but as we have the unique:true for isbn it will not add an new collection.
 
