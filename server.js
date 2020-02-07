@@ -12,7 +12,7 @@ import booksData from './data/books.json'
 //import netflixData from './data/netflix-titles.json'
 // import topMusicData from './data/top-music.json'
 
-const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
+const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-nin"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
@@ -50,13 +50,22 @@ const Book = mongoose.model('Book', {
   }
 });
 
-const addBooksToDatabase = () => {
-  booksData.forEach((book) => {
-    new Book(book).save();
-  });
-};
-//addBooksToDatabase();
-//This adds a new collection of books, but as we have the unique:true for isbn it will not add an new collection.
+if (process.env.RESET_DATABASE) {
+  console.log('Resetting database!')
+
+  const seedDatabase = async () => {
+    await Book.deleteMany()
+
+    const addBooksToDatabase = () => {
+      booksData.forEach((book) => {
+        new Book(book).save()
+      })
+    }
+    addBooksToDatabase()
+    //This adds a new collection of books.
+  }
+  seedDatabase()
+}
 
 // Defines the port the app will run on. Defaults to 8080, but can be 
 // overridden when starting the server. For example:
