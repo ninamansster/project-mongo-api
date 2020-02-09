@@ -16,6 +16,11 @@ const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/project-mongo"
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.Promise = Promise
 
+//Thinking of adding Author to make the relation work
+const Author = mongoose.model('Author', {
+  name: String
+})
+
 const Book = mongoose.model('Book', {
   bookID: {
     type: Number
