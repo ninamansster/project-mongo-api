@@ -1,13 +1,16 @@
 # Mongo API Project
 
-Replace this readme with your own information about your project. 
+I have created a book-api of about 500 books.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
+The assignment was to use certain tools to create a database in Mongodb. 
 
 ## The problem
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+The problem was to dive into the tools of database creation and practice some more GET-fetches. The tools were Mongoose for database models, Postman to test the api, Mongo Compass to check the database, Mongo Atlas to deploy the database and heroku som publish the api-endpoints. If I had more time, I would have created some kind of 
 
 ## View it live
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+https://booksapimongo.herokuapp.com/
+
+Endpoints: /books, books?=XXX, /books/isbn-number
+  
